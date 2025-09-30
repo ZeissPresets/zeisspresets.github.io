@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Photo Enhancer Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-camera"></i>
+                    <h1>AI Photo Enhancer Pro</h1>
+                </div>
+                <div class="header-info">
+                    <div class="time-display" id="current-time"></div>
+                    <div class="ai-status">
+                        <span class="status-indicator"></span>
+                        <span>AI Ready</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <div class="app-container">
+                <!-- Camera Section -->
+                <div class="camera-section">
+                    <div class="camera-header">
+                        <div class="mode-selector">
+                            <button class="mode-btn active" data-mode="photo">
+                                <i class="fas fa-camera"></i>
+                                <span>Photos</span>
+                            </button>
+                        </div>
+                        <div class="camera-settings">
+                            <button id="toggle-grid" class="btn-control" title="Toggle Grid">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button id="settings-btn" class="btn-control" title="Settings">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="camera-interface">
+                        <div class="camera-viewport">
+                            <div class="camera-container">
+                                <video id="video" autoplay playsinline></video>
+                                <canvas id="canvas" class="hidden"></canvas>
+                                <div id="focus-area" class="focus-area"></div>
+                                <div class="camera-overlay">
+                                    <div class="grid-overlay"></div>
+                                </div>
+                                <div class="camera-indicators">
+                                    <div class="indicator resolution">
+                                        <i class="fas fa-expand"></i>
+                                        <span>HD</span>
+                                    </div>
+                                    <div class="indicator timer">
+                                        <i class="fas fa-clock"></i>
+                                        <span>00:00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="camera-controls">
+                            <div class="control-group">
+                                <button id="toggle-flash" class="btn-control" title="Flash" disabled>
+                                    <i class="fas fa-bolt"></i>
+                                </button>
+                                <button id="switch-camera" class="btn-control" title="Switch Camera" disabled>
+                                    <i class="fas fa-sync-alt"></i>
+                                </button>
+                                <button id="toggle-beauty" class="btn-control" title="Beauty Mode">
+                                    <i class="fas fa-sparkles"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="shutter-control">
+                                <button id="take-photo" class="shutter-btn" disabled>
+                                    <div class="shutter-ring"></div>
+                                </button>
+                            </div>
+                            
+                            <div class="control-group">
+                                <button id="gallery-btn" class="btn-control" title="Gallery">
+                                    <i class="fas fa-images"></i>
+                                </button>
+                                <button id="enhance-toggle" class="btn-control" title="AI Enhance">
+                                    <i class="fas fa-magic"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="camera-actions">
+                        <button id="start-camera" class="btn btn-large btn-primary">
+                            <i class="fas fa-camera"></i>
+                            Aktifkan Kamera
+                        </button>
+                        <button id="upload-photo" class="btn btn-large btn-secondary">
+                            <i class="fas fa-upload"></i>
+                            Upload Foto
+                        </button>
+                        <input type="file" id="file-input" accept="image/*" class="hidden">
+                    </div>
+                </div>
+
+                <!-- Processing Section -->
+                <div class="processing-section">
+                    <div class="enhancement-options">
+                        <h3>AI Enhancement Options</h3>
+                        <div class="options-grid">
+                            <div class="option">
+                                <input type="checkbox" id="sharpness" checked>
+                                <label for="sharpness">
+                                    <i class="fas fa-search-plus"></i>
+                                    <span>Sharpness</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="checkbox" id="noise-reduction" checked>
+                                <label for="noise-reduction">
+                                    <i class="fas fa-wind"></i>
+                                    <span>Noise Reduction</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="checkbox" id="color-enhancement" checked>
+                                <label for="color-enhancement">
+                                    <i class="fas fa-palette"></i>
+                                    <span>Color Enhancement</span>
+                                </label>
+                            </div>
+                            <div class="option">
+                                <input type="checkbox" id="detail-enhancement" checked>
+                                <label for="detail-enhancement">
+                                    <i class="fas fa-eye"></i>
+                                    <span>Detail Enhancement</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button id="enhance-photo" class="btn btn-success btn-large" disabled>
+                            <i class="fas fa-magic"></i>
+                            Perindah dengan AI
+                        </button>
+                        <button id="download-result" class="btn btn-download btn-large" disabled>
+                            <i class="fas fa-download"></i>
+                            Simpan Hasil
+                        </button>
+                        <button id="reset" class="btn btn-outline">
+                            <i class="fas fa-redo"></i>
+                            Reset
+                        </button>
+                    </div>
+
+                    <div id="progress-container" class="progress-container hidden">
+                        <div class="progress-info">
+                            <h3>Memproses dengan AI...</h3>
+                            <p>Meningkatkan kualitas gambar, mengurangi noise, dan menajamkan detail</p>
+                            <div class="progress-bar">
+                                <div id="progress" class="progress"></div>
+                            </div>
+                            <div class="progress-stats">
+                                <span id="progress-text">0%</span>
+                                <span id="time-remaining">Perkiraan waktu: 10 detik</span>
+                            </div>
+                        </div>
+                        <div class="processing-steps">
+                            <div class="step active">
+                                <span class="step-number">1</span>
+                                <span class="step-text">Analisis Gambar</span>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">2</span>
+                                <span class="step-text">Peningkatan Detail</span>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">3</span>
+                                <span class="step-text">Optimasi Warna</span>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">4</span>
+                                <span class="step-text">Penyempurnaan HD</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section">
+                    <div class="comparison-header">
+                        <h2>Perbandingan Hasil</h2>
+                        <div class="comparison-controls">
+                            <button id="toggle-comparison" class="btn btn-outline">
+                                <i class="fas fa-exchange-alt"></i>
+                                Toggle View
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison">
+                        <div class="photo-container">
+                            <h3><i class="fas fa-camera"></i> Foto Asli</h3>
+                            <div class="image-wrapper">
+                                <img id="original-photo" src="" alt="Foto asli" class="hidden">
+                                <div id="original-placeholder" class="placeholder">
+                                    <div class="placeholder-icon">
+                                        <i class="fas fa-image"></i>
+                                    </div>
+                                    <p>Foto akan muncul di sini</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="photo-container">
+                            <h3><i class="fas fa-magic"></i> Hasil Perbaikan AI</h3>
+                            <div class="image-wrapper">
+                                <img id="enhanced-photo" src="" alt="Foto yang diperindah" class="hidden">
+                                <div id="enhanced-placeholder" class="placeholder">
+                                    <div class="placeholder-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p>Hasil perbaikan akan muncul di sini</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="error-message" class="error-message hidden">
+                        <div class="error-content">
+                            <span class="error-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </span>
+                            <h3>Terjadi Kesalahan</h3>
+                            <p id="error-text">Terjadi kesalahan saat memproses gambar. Coba lagi.</p>
+                            <button id="error-close" class="btn btn-primary">Oke</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>© 2024 AI Photo Enhancer Pro | Teknologi AI untuk gambar yang lebih baik</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Hidden canvas for image processing -->
+    <canvas id="processing-canvas" class="hidden"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
