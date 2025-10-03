@@ -3,263 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Photo Enhancer Pro</title>
+    <title>AI Camera Pro - Enhanced Photography</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-camera"></i>
-                    <h1>AI Photo Enhancer Pro</h1>
-                </div>
-                <div class="header-info">
-                    <div class="time-display" id="current-time"></div>
-                    <div class="ai-status">
-                        <span class="status-indicator"></span>
-                        <span>AI Ready</span>
-                    </div>
-                </div>
-            </div>
+            <h1>AI Camera Pro</h1>
+            <p class="subtitle">Teknologi AI canggih untuk fotografi terbaik - HDR+, AI Focus, Night Mode</p>
         </header>
 
-        <main>
-            <div class="app-container">
-                <!-- Camera Section -->
-                <div class="camera-section">
-                    <div class="camera-header">
-                        <div class="mode-selector">
-                            <button class="mode-btn active" data-mode="photo">
-                                <i class="fas fa-camera"></i>
-                                <span>Photos</span>
-                            </button>
-                        </div>
-                        <div class="camera-settings">
-                            <button id="toggle-grid" class="btn-control" title="Toggle Grid">
-                                <i class="fas fa-th"></i>
-                            </button>
-                            <button id="settings-btn" class="btn-control" title="Settings">
-                                <i class="fas fa-cog"></i>
-                            </button>
-                        </div>
+        <div class="main-content">
+            <div class="camera-section">
+                <h2 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    Kamera AI
+                </h2>
+                
+                <div class="camera-container">
+                    <video id="video" autoplay playsinline></video>
+                    <div class="camera-overlay">
+                        <span id="camera-status">Kamera Aktif</span>
+                        <span id="ai-status">AI: Siap</span>
                     </div>
-                    
-                    <div class="camera-interface">
-                        <div class="camera-viewport">
-                            <div class="camera-container">
-                                <video id="video" autoplay playsinline></video>
-                                <canvas id="canvas" class="hidden"></canvas>
-                                <div id="focus-area" class="focus-area"></div>
-                                <div class="camera-overlay">
-                                    <div class="grid-overlay"></div>
-                                </div>
-                                <div class="camera-indicators">
-                                    <div class="indicator resolution">
-                                        <i class="fas fa-expand"></i>
-                                        <span>HD</span>
-                                    </div>
-                                    <div class="indicator timer">
-                                        <i class="fas fa-clock"></i>
-                                        <span>00:00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="camera-controls">
-                            <div class="control-group">
-                                <button id="toggle-flash" class="btn-control" title="Flash" disabled>
-                                    <i class="fas fa-bolt"></i>
-                                </button>
-                                <button id="switch-camera" class="btn-control" title="Switch Camera" disabled>
-                                    <i class="fas fa-sync-alt"></i>
-                                </button>
-                                <button id="toggle-beauty" class="btn-control" title="Beauty Mode">
-                                    <i class="fas fa-sparkles"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="shutter-control">
-                                <button id="take-photo" class="shutter-btn" disabled>
-                                    <div class="shutter-ring"></div>
-                                </button>
-                            </div>
-                            
-                            <div class="control-group">
-                                <button id="gallery-btn" class="btn-control" title="Gallery">
-                                    <i class="fas fa-images"></i>
-                                </button>
-                                <button id="enhance-toggle" class="btn-control" title="AI Enhance">
-                                    <i class="fas fa-magic"></i>
-                                </button>
-                            </div>
-                        </div>
+                    <div class="focus-indicator" id="focus-indicator"></div>
+                </div>
+                
+                <div class="camera-controls">
+                    <div class="control-group">
+                        <button id="switchCamera" class="btn btn-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z"/>
+                            </svg>
+                            Ganti Kamera
+                        </button>
+                        <button id="capture" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
+                            </svg>
+                            Ambil Foto
+                        </button>
                     </div>
-                    
-                    <div class="camera-actions">
-                        <button id="start-camera" class="btn btn-large btn-primary">
-                            <i class="fas fa-camera"></i>
-                            Aktifkan Kamera
+                    <div class="control-group">
+                        <button id="autoFocus" class="btn btn-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                            AI Focus
                         </button>
-                        <button id="upload-photo" class="btn btn-large btn-secondary">
-                            <i class="fas fa-upload"></i>
-                            Upload Foto
+                        <button id="nightMode" class="btn btn-outline">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+                            </svg>
+                            Night Mode
                         </button>
-                        <input type="file" id="file-input" accept="image/*" class="hidden">
                     </div>
                 </div>
 
-                <!-- Processing Section -->
-                <div class="processing-section">
-                    <div class="enhancement-options">
-                        <h3>AI Enhancement Options</h3>
-                        <div class="options-grid">
-                            <div class="option">
-                                <input type="checkbox" id="sharpness" checked>
-                                <label for="sharpness">
-                                    <i class="fas fa-search-plus"></i>
-                                    <span>Sharpness</span>
-                                </label>
-                            </div>
-                            <div class="option">
-                                <input type="checkbox" id="noise-reduction" checked>
-                                <label for="noise-reduction">
-                                    <i class="fas fa-wind"></i>
-                                    <span>Noise Reduction</span>
-                                </label>
-                            </div>
-                            <div class="option">
-                                <input type="checkbox" id="color-enhancement" checked>
-                                <label for="color-enhancement">
-                                    <i class="fas fa-palette"></i>
-                                    <span>Color Enhancement</span>
-                                </label>
-                            </div>
-                            <div class="option">
-                                <input type="checkbox" id="detail-enhancement" checked>
-                                <label for="detail-enhancement">
-                                    <i class="fas fa-eye"></i>
-                                    <span>Detail Enhancement</span>
-                                </label>
-                            </div>
+                <div class="ai-controls-panel">
+                    <h3>Kontrol AI</h3>
+                    <div class="ai-controls-grid">
+                        <div class="ai-control-item">
+                            <label for="ai-mode">Mode AI</label>
+                            <select id="ai-mode">
+                                <option value="auto">Auto (Rekomendasi AI)</option>
+                                <option value="portrait">Portrait</option>
+                                <option value="landscape">Landscape</option>
+                                <option value="night">Night</option>
+                                <option value="macro">Macro</option>
+                                <option value="sports">Sports</option>
+                            </select>
+                        </div>
+                        <div class="ai-control-item">
+                            <label for="ai-intensity">Intensitas AI</label>
+                            <input type="range" id="ai-intensity" min="1" max="10" value="8">
+                            <span id="ai-intensity-value">8</span>
                         </div>
                     </div>
-                    
-                    <div class="action-buttons">
-                        <button id="enhance-photo" class="btn btn-success btn-large" disabled>
-                            <i class="fas fa-magic"></i>
-                            Perindah dengan AI
+                    <div class="ai-actions">
+                        <button id="ai-optimize" class="btn btn-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zM4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM10 8c-.552 0-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5S10.552 8 10 8z"/>
+                            </svg>
+                            Optimasi AI
                         </button>
-                        <button id="download-result" class="btn btn-download btn-large" disabled>
-                            <i class="fas fa-download"></i>
-                            Simpan Hasil
-                        </button>
-                        <button id="reset" class="btn btn-outline">
-                            <i class="fas fa-redo"></i>
-                            Reset
-                        </button>
-                    </div>
-
-                    <div id="progress-container" class="progress-container hidden">
-                        <div class="progress-info">
-                            <h3>Memproses dengan AI...</h3>
-                            <p>Meningkatkan kualitas gambar, mengurangi noise, dan menajamkan detail</p>
-                            <div class="progress-bar">
-                                <div id="progress" class="progress"></div>
-                            </div>
-                            <div class="progress-stats">
-                                <span id="progress-text">0%</span>
-                                <span id="time-remaining">Perkiraan waktu: 10 detik</span>
-                            </div>
-                        </div>
-                        <div class="processing-steps">
-                            <div class="step active">
-                                <span class="step-number">1</span>
-                                <span class="step-text">Analisis Gambar</span>
-                            </div>
-                            <div class="step">
-                                <span class="step-number">2</span>
-                                <span class="step-text">Peningkatan Detail</span>
-                            </div>
-                            <div class="step">
-                                <span class="step-number">3</span>
-                                <span class="step-text">Optimasi Warna</span>
-                            </div>
-                            <div class="step">
-                                <span class="step-number">4</span>
-                                <span class="step-text">Penyempurnaan HD</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Results Section -->
-                <div class="results-section">
-                    <div class="comparison-header">
-                        <h2>Perbandingan Hasil</h2>
-                        <div class="comparison-controls">
-                            <button id="toggle-comparison" class="btn btn-outline">
-                                <i class="fas fa-exchange-alt"></i>
-                                Toggle View
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="comparison">
-                        <div class="photo-container">
-                            <h3><i class="fas fa-camera"></i> Foto Asli</h3>
-                            <div class="image-wrapper">
-                                <img id="original-photo" src="" alt="Foto asli" class="hidden">
-                                <div id="original-placeholder" class="placeholder">
-                                    <div class="placeholder-icon">
-                                        <i class="fas fa-image"></i>
-                                    </div>
-                                    <p>Foto akan muncul di sini</p>
+                <div class="photo-analysis">
+                    <h3>Analisis Real-time AI</h3>
+                    <div class="analysis-results" id="analysisResults">
+                        <div class="analysis-row">
+                            <div class="analysis-item">
+                                <span class="analysis-label">Kecerahan</span>
+                                <div class="analysis-bar">
+                                    <div class="analysis-fill" id="brightness-bar"></div>
                                 </div>
+                                <span class="analysis-value" id="brightness-value">-</span>
+                            </div>
+                            <div class="analysis-item">
+                                <span class="analysis-label">Kontras</span>
+                                <div class="analysis-bar">
+                                    <div class="analysis-fill" id="contrast-bar"></div>
+                                </div>
+                                <span class="analysis-value" id="contrast-value">-</span>
                             </div>
                         </div>
-                        
-                        <div class="photo-container">
-                            <h3><i class="fas fa-magic"></i> Hasil Perbaikan AI</h3>
-                            <div class="image-wrapper">
-                                <img id="enhanced-photo" src="" alt="Foto yang diperindah" class="hidden">
-                                <div id="enhanced-placeholder" class="placeholder">
-                                    <div class="placeholder-icon">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <p>Hasil perbaikan akan muncul di sini</p>
+                        <div class="analysis-row">
+                            <div class="analysis-item">
+                                <span class="analysis-label">Fokus AI</span>
+                                <div class="analysis-bar">
+                                    <div class="analysis-fill" id="focus-bar"></div>
                                 </div>
+                                <span class="analysis-value" id="focus-value">-</span>
+                            </div>
+                            <div class="analysis-item">
+                                <span class="analysis-label">Noise Level</span>
+                                <div class="analysis-bar">
+                                    <div class="analysis-fill" id="noise-bar"></div>
+                                </div>
+                                <span class="analysis-value" id="noise-value">-</span>
                             </div>
                         </div>
-                    </div>
-
-                    <div id="error-message" class="error-message hidden">
-                        <div class="error-content">
-                            <span class="error-icon">
-                                <i class="fas fa-exclamation-triangle"></i>
-                            </span>
-                            <h3>Terjadi Kesalahan</h3>
-                            <p id="error-text">Terjadi kesalahan saat memproses gambar. Coba lagi.</p>
-                            <button id="error-close" class="btn btn-primary">Oke</button>
+                        <div class="analysis-score">
+                            <div class="score-item">
+                                <span class="score-label">Skor AI</span>
+                                <div class="score-circle">
+                                    <span id="ai-score">-</span>
+                                </div>
+                            </div>
+                            <div class="score-item">
+                                <span class="score-label">Kesimpulan AI</span>
+                                <span class="ai-conclusion" id="ai-conclusion">-</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
 
-        <footer>
-            <div class="footer-content">
-                <p>© 2024 AI Photo Enhancer Pro | Teknologi AI untuk gambar yang lebih baik</p>
+            <div class="processing-section">
+                <h2 class="section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+                    </svg>
+                    Pemrosesan AI
+                </h2>
+                
+                <div class="progress-container" id="progress-container" style="display: none;">
+                    <div class="progress-info">
+                        <span>AI sedang memproses foto...</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-details">
+                        <div class="progress-time" id="progress-time">Estimasi: - detik</div>
+                        <div class="progress-stage" id="progress-stage">Menganalisis...</div>
+                    </div>
+                </div>
+                
+                <div class="processing-steps">
+                    <div class="step" id="step1">
+                        <div class="step-icon">1</div>
+                        <div class="step-info">
+                            <div class="step-name">Analisis AI Deep Learning</div>
+                            <div class="step-desc">Menganalisis konten dan kualitas gambar</div>
+                        </div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-icon">2</div>
+                        <div class="step-info">
+                            <div class="step-name">Enhancement Multi-layer</div>
+                            <div class="step-desc">Meningkatkan detail, warna, dan kontras</div>
+                        </div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-icon">3</div>
+                        <div class="step-info">
+                            <div class="step-name">AI Focus & Sharpness</div>
+                            <div class="step-desc">Optimasi ketajaman dan fokus cerdas</div>
+                        </div>
+                    </div>
+                    <div class="step" id="step4">
+                        <div class="step-icon">4</div>
+                        <div class="step-info">
+                            <div class="step-name">Final AI Processing</div>
+                            <div class="step-desc">Penyempurnaan akhir dengan neural network</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-container" id="result-container" style="display: none;">
+                    <div class="result-header">
+                        <h3>Hasil Pemrosesan AI</h3>
+                        <div class="result-scores">
+                            <div class="result-score-badge">
+                                <span class="score-label">Sebelum</span>
+                                <span class="score-value" id="before-score">-</span>
+                            </div>
+                            <div class="result-score-badge improved">
+                                <span class="score-label">Sesudah</span>
+                                <span class="score-value" id="after-score">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="result-comparison">
+                        <div class="comparison-item">
+                            <h4>Original</h4>
+                            <canvas id="before-canvas"></canvas>
+                            <div class="image-stats">
+                                <div class="stat"><span>Fokus:</span><span id="before-focus">-</span></div>
+                                <div class="stat"><span>Dinamis:</span><span id="before-dynamic">-</span></div>
+                                <div class="stat"><span>Noise:</span><span id="before-noise">-</span></div>
+                            </div>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>AI Enhanced</h4>
+                            <canvas id="after-canvas"></canvas>
+                            <div class="image-stats">
+                                <div class="stat"><span>Fokus:</span><span id="after-focus">-</span></div>
+                                <div class="stat"><span>Dinamis:</span><span id="after-dynamic">-</span></div>
+                                <div class="stat"><span>Noise:</span><span id="after-noise">-</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="improvement-stats">
+                        <h4>Peningkatan AI</h4>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">📊</div>
+                                <div class="stat-value" id="improvement-quality">+0%</div>
+                                <div class="stat-label">Kualitas</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🎯</div>
+                                <div class="stat-value" id="improvement-focus">+0%</div>
+                                <div class="stat-label">Fokus</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">🎨</div>
+                                <div class="stat-value" id="improvement-color">+0%</div>
+                                <div class="stat-label">Warna</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">⚡</div>
+                                <div class="stat-value" id="improvement-detail">+0%</div>
+                                <div class="stat-label">Detail</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ai-analysis-result">
+                        <h4>Analisis AI Mendalam</h4>
+                        <div class="ai-insights">
+                            <div class="insight-item">
+                                <span class="insight-label">Jenis Gambar:</span>
+                                <span class="insight-value" id="image-type">-</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">AI Model:</span>
+                                <span class="insight-value" id="ai-model">-</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Waktu Proses:</span>
+                                <span class="insight-value" id="process-time">-</span>
+                            </div>
+                            <div class="insight-item">
+                                <span class="insight-label">Rekomendasi:</span>
+                                <span class="insight-value" id="ai-recommendation">-</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="process-controls">
+                    <button id="processBtn" class="btn btn-success" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+                        </svg>
+                        Proses dengan AI
+                    </button>
+                    <button id="saveResult" class="btn btn-outline" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>
+                        Simpan Hasil
+                    </button>
+                </div>
             </div>
-        </footer>
+        </div>
+
+        <div class="gallery-section">
+            <h2 class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+                Galeri AI
+            </h2>
+            
+            <div class="gallery-controls">
+                <div class="gallery-filter">
+                    <select id="gallery-filter">
+                        <option value="all">Semua Foto</option>
+                        <option value="portrait">Portrait</option>
+                        <option value="landscape">Landscape</option>
+                        <option value="night">Night Mode</option>
+                        <option value="macro">Macro</option>
+                    </select>
+                </div>
+                <button id="clear-gallery" class="btn btn-outline">Bersihkan Galeri</button>
+            </div>
+            
+            <div class="gallery-grid" id="gallery-grid">
+                <div class="empty-gallery">
+                    <div class="empty-icon">📷</div>
+                    <p>Belum ada foto yang diproses AI</p>
+                    <small>Ambil foto dan proses dengan AI untuk melihat hasilnya di sini</small>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Hidden canvas for image processing -->
-    <canvas id="processing-canvas" class="hidden"></canvas>
+    <div class="toast" id="toast">
+        <span id="toast-message">Foto berhasil diproses!</span>
+    </div>
 
+    <script src="camera.js"></script>
+    <script src="ai.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
